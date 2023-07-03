@@ -4,12 +4,20 @@
 HelloImageStubImpl::HelloImageStubImpl() { }
 HelloImageStubImpl::~HelloImageStubImpl() { }
 
-void HelloImageStubImpl::sayHello(const std::shared_ptr<CommonAPI::ClientId> _client,
-	std::string _name, sayHelloReply_t _reply) {
-	    std::stringstream messageStream;
-	    messageStream << "Hello " << _name << "!";
-	    std::cout << "sayHello('" << _name << "'): '" << messageStream.str() << "'\n";
+void HelloImageStubImpl::sendImage(const std::shared_ptr<CommonAPI::ClientId> _client,
+	std::string _name, sendImageReply_t _reply) {
+	cv::Mat image = cv::imread("image.jpg");
+	if (image.empty()) {
+        std::cerr << "Failed to load image." << std::endl;
+        return;
+    }
+	// 이미지를 바이트 벡터로 인코딩
+    std::vector<uchar> encoded_image;
+    if (!cv::imencode(".jpg", image, encoded_image)) {
+        std::cerr << "Failed to encode image." << std::endl;
+        return;
+    }
 
-    _reply(messageStream.str());
+    _reply(encoded_image);
 };
 

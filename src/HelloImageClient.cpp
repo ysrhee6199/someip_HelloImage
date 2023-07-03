@@ -1,10 +1,11 @@
 // HelloImageClient.cpp
 #include <iostream>
-#include <vector>
 #include <string>
 #include <unistd.h>
 #include <CommonAPI/CommonAPI.hpp>
 #include <v1/commonapi/HelloImageProxy.hpp>
+#include <opencv2/opencv.hpp>
+
 
 using namespace v1_0::commonapi;
 
@@ -20,7 +21,16 @@ int main() {
 
     CommonAPI::CallStatus callStatus;
     std::vector<unsigned char> returnImage;
-    myProxy->sayHello("Bob", callStatus, returnMessage);
-    std::cout << "Got message: '" << returnMessage << "'\n";
+    myProxy->sendImage("Bob", callStatus, returnImage);
+
+    cv::Mat decoded_image = cv::imdecode(returnImage, cv::IMREAD_COLOR);
+     if (decoded_image.empty()) {
+        std::cerr << "Failed to decode image." << std::endl;
+        return 1;
+    }
+    std::cout << "Got message@@'" << "'\n";
+    cv::namedWindow("Decoded Image");
+    cv::imshow("Decoded Image", decoded_image);
+    cv::waitKey(0);
     return 0;
 }

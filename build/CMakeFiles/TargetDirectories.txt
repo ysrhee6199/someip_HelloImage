@@ -1,0 +1,4 @@
+/home/avees/proj-image/someip_HelloImage/build/CMakeFiles/rebuild_cache.dir
+/home/avees/proj-image/someip_HelloImage/build/CMakeFiles/edit_cache.dir
+/home/avees/proj-image/someip_HelloImage/build/CMakeFiles/HelloImageService.dir
+/home/avees/proj-image/someip_HelloImage/build/CMakeFiles/HelloImageClient.dir
