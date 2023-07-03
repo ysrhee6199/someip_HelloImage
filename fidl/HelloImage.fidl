@@ -1,0 +1,13 @@
+package commonapi
+
+interface HelloImage {
+  version {major 1 minor 0}
+  method sendImage {
+    in {
+      String name
+    }
+    out {
+      UInt8 [] image
+    }
+  }
+}
